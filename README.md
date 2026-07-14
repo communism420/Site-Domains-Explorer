@@ -4,6 +4,11 @@ Site Domains Explorer is a fully open-source Chromium extension that shows the f
 
 ![Site history](store-assets/screenshot-history-en-1280x800.png)
 
+## Website
+
+- [Project website](https://communism420.github.io/Site-Domains-Explorer/)
+- [Published Privacy Policy](https://communism420.github.io/Site-Domains-Explorer/privacy.html)
+
 ## Features
 
 - Near-real-time hostname discovery with `chrome.webRequest.onBeforeRequest`.

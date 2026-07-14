@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://communism420.github.io/Site-Domains-Explorer/sitemap.xml

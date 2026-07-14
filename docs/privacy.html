@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Privacy Policy for the Site Domains Explorer Chromium extension."
+    >
+    <meta name="theme-color" content="#0f766e">
+    <meta name="referrer" content="no-referrer">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    >
+    <title>Privacy Policy | Site Domains Explorer</title>
+    <link
+      rel="canonical"
+      href="https://communism420.github.io/Site-Domains-Explorer/privacy.html"
+    >
+    <link rel="icon" type="image/png" href="assets/icon-32.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Site Domains Explorer home">
+          <img src="assets/icon-32.png" width="32" height="32" alt="">
+          <span>Site Domains Explorer</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="privacy.html" aria-current="page">Privacy Policy</a>
+          <a
+            href="https://github.com/communism420/Site-Domains-Explorer"
+            target="_blank"
+            rel="noreferrer"
+          >Source Code</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="policy-main">
+      <article class="container policy-document">
+        <header class="policy-header">
+          <a class="back-link" href="index.html">Back to home</a>
+          <p class="eyebrow">Site Domains Explorer</p>
+          <h1>Privacy Policy</h1>
+          <p class="effective-date">Effective date: July 14, 2026</p>
+          <p class="policy-intro">
+            Site Domains Explorer is a Chrome extension that identifies first-party and
+            third-party hostnames used by websites. This policy describes exactly what the
+            extension processes, why it is needed, and how users control it.
+          </p>
+        </header>
+
+        <aside class="policy-summary" aria-label="Privacy summary">
+          <strong>Privacy at a glance</strong>
+          <p>
+            Collection requires explicit consent. Saved data stays in local Chrome storage.
+            The extension has no analytics, advertising, account system, or external data server.
+          </p>
+        </aside>
+
+        <section class="policy-section">
+          <h2>Data processed and stored</h2>
+          <p>
+            After the user gives explicit consent, the extension processes website and network
+            addresses locally to extract hostname values such as <code>example.com</code> or
+            <code>cdn.example.com</code>. It stores only:
+          </p>
+          <ul>
+            <li>the main hostname used to group a visited site;</li>
+            <li>unique hostnames found in page resources, network requests, and URL-bearing attributes;</li>
+            <li>the timestamp of the last visit;</li>
+            <li>the number of visits;</li>
+            <li>the selected interface language; and</li>
+            <li>the user's data-collection consent setting.</li>
+          </ul>
+          <p>
+            The extension does not save page text, images, full URLs, paths, query strings,
+            request or response bodies, cookies, credentials, form values, personal
+            communications, or clipboard contents. Full addresses may be handled briefly in
+            the browser only to extract their hostname and are not persisted.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Purpose</h2>
+          <p>
+            Stored hostnames are used only to show which first-party and third-party domains a
+            visited website uses, provide local search and history, and let the user copy selected
+            hostname lists.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Local storage and retention</h2>
+          <p>
+            All saved data is kept in <code>chrome.storage.local</code> in the user's Chrome
+            profile. Site Domains Explorer does not transmit stored or processed browsing data
+            off the user's device.
+          </p>
+          <p>
+            History remains until the user deletes it from the popup or history page, clears
+            extension storage, or uninstalls the extension. Disabling future collection does not
+            automatically delete existing history.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Sharing and sale</h2>
+          <p>
+            Site Domains Explorer does not sell, rent, share, disclose, or transfer user data to
+            third parties. User data is not used for advertising, profiling, credit decisions, or
+            any purpose unrelated to the extension's single purpose.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Permissions</h2>
+          <dl class="permission-list">
+            <div>
+              <dt><code>storage</code></dt>
+              <dd>Stores domain history, language, and consent locally.</dd>
+            </div>
+            <div>
+              <dt><code>webRequest</code></dt>
+              <dd>Observes HTTP(S) request destinations without changing or blocking traffic.</dd>
+            </div>
+            <div>
+              <dt><code>webNavigation</code></dt>
+              <dd>Associates normal and single-page navigation with the correct site.</dd>
+            </div>
+            <div>
+              <dt><code>http://*/*</code> and <code>https://*/*</code></dt>
+              <dd>Allow hostname discovery on websites the user chooses to visit.</dd>
+            </div>
+          </dl>
+          <p>
+            Copying starts only when the user presses a copy button. The extension does not
+            request clipboard permission and never reads the clipboard.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>User choices</h2>
+          <p>
+            Collection is disabled by default. The first-run disclosure requires an affirmative
+            checkbox and button before collection starts. The user can later disable collection,
+            delete all history, or uninstall the extension.
+          </p>
+          <p>
+            The extension is not allowed to run in Incognito mode, so private browsing activity
+            is not added to its saved history.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Security</h2>
+          <p>
+            The extension uses Manifest V3, contains no remotely hosted executable code, and
+            restricts local storage access to trusted extension contexts. Its packaged page
+            observer has no access to Chrome extension APIs, reports only destination hostnames
+            while collection is enabled, does not read payloads or responses, and preserves the
+            result of every observed call.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Open source</h2>
+          <p>
+            Site Domains Explorer is fully open source under the MIT License. The complete source
+            code, build script, localizations, privacy controls, and documentation are available
+            in the
+            <a
+              href="https://github.com/communism420/Site-Domains-Explorer"
+              target="_blank"
+              rel="noreferrer"
+            >public GitHub repository</a>.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Changes and contact</h2>
+          <p>
+            Material changes will be reflected in an updated policy and, when required, a new
+            in-product disclosure. Privacy questions can be submitted through the support contact
+            in the Chrome Web Store listing or the
+            <a
+              href="https://github.com/communism420/Site-Domains-Explorer/issues"
+              target="_blank"
+              rel="noreferrer"
+            >project issue tracker</a>. Do not include sensitive personal information in a public issue.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Site Domains Explorer</p>
+        <p><a href="index.html">Home</a> · <a href="privacy.html">Privacy Policy</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

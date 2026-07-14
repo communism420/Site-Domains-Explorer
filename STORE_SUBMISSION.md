@@ -1,6 +1,6 @@
 # Подготовка Site Domains Explorer к Chrome Web Store
 
-Этот файл содержит готовые формулировки для Developer Dashboard. Перед отправкой опубликуйте `PRIVACY_POLICY.md` по общедоступному HTTPS-адресу и укажите реальный контакт поддержки.
+Этот файл содержит готовые формулировки для Developer Dashboard. Используйте опубликованную политику по адресу `https://communism420.github.io/Site-Domains-Explorer/privacy.html` и укажите реальный контакт поддержки.
 
 ## Единственная цель
 
@@ -59,7 +59,7 @@ Supported interface languages: English, Spanish, German, Portuguese (Brazil), Ru
 ## Проверка перед отправкой
 
 1. Загрузите `dist/site-domains-explorer-1.0.0.zip`; `manifest.json` должен лежать в корне архива.
-2. Опубликуйте `PRIVACY_POLICY.md` на GitHub Pages или другом публичном HTTPS-сайте и укажите URL в Developer Dashboard.
+2. Укажите `https://communism420.github.io/Site-Domains-Explorer/privacy.html` как Privacy Policy URL в Developer Dashboard.
 3. Укажите рабочий email и URL поддержки; текст политики должен ссылаться на тот же канал связи.
 4. Загрузите иконку `icons/icon-128.png` и подготовленный английский скриншот `store-assets/screenshot-history-en-1280x800.png`. Русский вариант находится в `store-assets/screenshot-history-1280x800.png`.
 5. Включите двухэтапную аутентификацию аккаунта разработчика.
