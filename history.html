@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All sites - Site Domains Explorer</title>
+    <link rel="stylesheet" href="history.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow" data-i18n="extensionName">Site Domains Explorer</p>
+          <h1 data-i18n="allSitesTitle">All sites</h1>
+        </div>
+        <div class="header-status">
+          <span id="liveState" class="live-state" data-active="false" aria-live="polite">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span id="liveStateText">Paused</span>
+          </span>
+          <span id="resultsCount" class="results-count">0</span>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="Site search" data-i18n-aria-label="siteSearchLabel">
+        <label class="search-box">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input
+            id="siteSearchInput"
+            type="search"
+            placeholder="Search sites"
+            data-i18n-placeholder="allSitesSearchPlaceholder"
+            autocomplete="off"
+          >
+        </label>
+        <button id="clearHistoryButton" class="clear-history-button" type="button" disabled>
+          <span data-i18n="clearHistoryButton">Delete all history</span>
+        </button>
+      </section>
+
+      <p id="statusText" class="status" role="status">Loading sites...</p>
+      <section id="sitesList" class="sites-list" aria-live="polite"></section>
+
+      <section id="emptyState" class="empty-state hidden">
+        <div class="empty-mark">∅</div>
+        <h2 id="emptyTitle"></h2>
+        <p id="emptyHint"></p>
+      </section>
+    </main>
+
+    <dialog
+      id="clearHistoryDialog"
+      class="confirm-dialog"
+      aria-labelledby="clearHistoryTitle"
+      aria-describedby="clearHistoryMessage"
+    >
+      <form method="dialog" class="confirm-dialog-panel">
+        <div class="warning-mark" aria-hidden="true">!</div>
+        <h2 id="clearHistoryTitle" data-i18n="clearHistoryDialogTitle">
+          Delete all domain history?
+        </h2>
+        <p id="clearHistoryMessage" data-i18n="clearHistoryDialogMessage">
+          All saved sites and their domains will be permanently deleted. This action cannot be undone.
+        </p>
+        <div class="confirm-dialog-actions">
+          <button id="cancelClearHistoryButton" class="dialog-button cancel" value="cancel">
+            <span data-i18n="cancelButton">Cancel</span>
+          </button>
+          <button
+            id="confirmClearHistoryButton"
+            class="dialog-button confirm"
+            type="button"
+          >
+            <span data-i18n="confirmClearHistoryButton">Delete everything</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="history.js"></script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Privacy and data collection - Site Domains Explorer</title>
+    <link rel="stylesheet" href="onboarding.css">
+  </head>
+  <body>
+    <main class="settings-shell">
+      <header class="settings-header">
+        <div>
+          <p class="eyebrow" data-i18n="extensionName">Site Domains Explorer</p>
+          <h1 data-i18n="privacySettingsTitle">Privacy and data collection</h1>
+        </div>
+        <label class="language-select">
+          <span data-i18n="languageSelectLabel">Language</span>
+          <select id="languageSelect" autocomplete="off">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="de">Deutsch</option>
+            <option value="pt_BR">Português (Brasil)</option>
+            <option value="ru">Русский</option>
+            <option value="uk">Українська</option>
+            <option value="fr">Français</option>
+          </select>
+        </label>
+      </header>
+
+      <section class="settings-panel" aria-labelledby="privacyHeading">
+        <div class="panel-heading">
+          <span class="status-badge" data-i18n="choiceRequiredBadge">Your choice is required</span>
+          <h2 id="privacyHeading" data-i18n="privacyIntroTitle">How the extension handles browsing data</h2>
+          <p data-i18n="privacyIntro">
+            Review the details below before enabling automatic domain collection.
+          </p>
+        </div>
+
+        <div class="data-list">
+          <article class="data-item">
+            <span class="data-index" aria-hidden="true">01</span>
+            <div>
+              <h3 data-i18n="dataCollectedTitle">Data that is processed</h3>
+              <p data-i18n="dataCollectedBody">
+                Hostnames from opened pages, resource URLs and links, plus the visit time and visit count.
+              </p>
+            </div>
+          </article>
+          <article class="data-item">
+            <span class="data-index" aria-hidden="true">02</span>
+            <div>
+              <h3 data-i18n="dataNotCollectedTitle">Data that is not saved</h3>
+              <p data-i18n="dataNotCollectedBody">
+                Page content, full URLs, query strings, cookies, credentials, form values and request bodies are not saved.
+              </p>
+            </div>
+          </article>
+          <article class="data-item">
+            <span class="data-index" aria-hidden="true">03</span>
+            <div>
+              <h3 data-i18n="dataStorageTitle">Local-only storage</h3>
+              <p data-i18n="dataStorageBody">
+                Saved data stays in Chrome storage on this device. The extension has no analytics and sends no data to a server.
+              </p>
+            </div>
+          </article>
+          <article class="data-item">
+            <span class="data-index" aria-hidden="true">04</span>
+            <div>
+              <h3 data-i18n="openSourceTitle">Fully open source</h3>
+              <p>
+                <span data-i18n="openSourceBody">
+                  All extension code and build files are public under the MIT License.
+                </span>
+                <a
+                  class="source-link"
+                  href="https://github.com/communism420/Site-Domains-Explorer"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="viewSourceCode"
+                >View source code</a>
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="disclosure">
+          <strong data-i18n="consentDisclosureTitle">Permission disclosure</strong>
+          <p data-i18n="consentDisclosureBody">
+            To identify own and third-party services, Site Domains Explorer reads the addresses of websites you open and their network requests, extracts only hostnames, and stores those hostnames locally. This browsing activity is not shared, sold or transmitted off your device.
+          </p>
+        </div>
+
+        <div id="disabledState" class="consent-state">
+          <label class="consent-check">
+            <input id="consentCheckbox" type="checkbox">
+            <span data-i18n="consentCheckboxLabel">I understand this disclosure and agree to local domain collection.</span>
+          </label>
+          <div class="button-row">
+            <button id="enableButton" class="button primary" type="button" disabled data-i18n="enableCollectionButton">
+              Allow domain collection
+            </button>
+            <button id="notNowButton" class="button secondary" type="button" data-i18n="notNowButton">
+              Not now
+            </button>
+          </div>
+        </div>
+
+        <div id="enabledState" class="consent-state hidden">
+          <div class="enabled-summary" role="status">
+            <strong data-i18n="collectionEnabledTitle">Domain collection is enabled</strong>
+            <p data-i18n="collectionEnabledBody">
+              You can disable future collection at any time. Existing history remains available until you delete it.
+            </p>
+          </div>
+          <div class="button-row">
+            <button id="closeButton" class="button primary" type="button" data-i18n="closeButton">Done</button>
+            <button id="disableButton" class="button danger" type="button" data-i18n="disableCollectionButton">
+              Disable collection
+            </button>
+          </div>
+        </div>
+
+        <p id="statusText" class="status" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script src="onboarding.js"></script>
+  </body>
+</html>

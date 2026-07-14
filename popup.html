@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site Domains Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="header">
+        <div>
+          <p class="eyebrow" data-i18n="extensionName">Site Domains Explorer</p>
+          <h1 id="screenTitle" data-i18n="currentSiteTitle">Current site</h1>
+        </div>
+        <label class="language-select">
+          <span data-i18n="languageSelectLabel">Language</span>
+          <select id="languageSelect" autocomplete="off">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="de">Deutsch</option>
+            <option value="pt_BR">Português (Brasil)</option>
+            <option value="ru">Русский</option>
+            <option value="uk">Українська</option>
+            <option value="fr">Français</option>
+          </select>
+        </label>
+      </header>
+
+      <section id="currentView" class="view">
+        <div class="detail-summary">
+          <div>
+            <p class="eyebrow" data-i18n="currentTabEyebrow">Open tab</p>
+            <h2 id="detailHostname" data-i18n="loading">Loading...</h2>
+            <p id="visitMeta" class="summary-meta" data-i18n="checkingSavedData">Checking saved data</p>
+          </div>
+          <div class="summary-side">
+            <span id="detailCount" class="count-badge">0</span>
+            <span id="liveState" class="live-state" data-active="false" aria-live="polite">
+              <span class="live-dot" aria-hidden="true"></span>
+              <span id="liveStateText">Paused</span>
+            </span>
+          </div>
+        </div>
+
+        <label class="search-box">
+          <span class="search-icon">⌕</span>
+          <input id="domainSearchInput" type="search" placeholder="Filter domains" data-i18n-placeholder="domainFilterPlaceholder" autocomplete="off">
+        </label>
+
+        <div class="actions">
+          <button id="refreshButton" class="button primary" type="button">
+            <span data-i18n="refreshCurrentSite">Refresh current site</span>
+          </button>
+          <button id="historyButton" class="button secondary" type="button">
+            <span data-i18n="openAllSites">All sites</span>
+          </button>
+          <button id="privacyButton" class="button secondary" type="button">
+            <span data-i18n="privacySettingsButton">Privacy and collection</span>
+          </button>
+          <div class="copy-actions" aria-label="Copy domains" data-i18n-aria-label="copyActionsLabel">
+            <button id="copyOwnButton" class="button secondary compact" type="button" disabled>
+              Copy own domains
+            </button>
+            <button id="copyThirdPartyButton" class="button secondary compact" type="button" disabled>
+              Copy third-party domains
+            </button>
+            <button id="copyAllButton" class="button secondary compact" type="button" disabled>
+              Copy all domains
+            </button>
+          </div>
+          <button id="clearButton" class="button danger" type="button">
+            <span data-i18n="clearAllData">Clear all data</span>
+          </button>
+        </div>
+
+        <p id="statusText" class="status" role="status"></p>
+        <div id="domainsList" class="domains-list"></div>
+        <div id="emptyState" class="empty-state hidden">
+          <div class="empty-mark">∅</div>
+          <p data-i18n="emptyStateTitle">No data for the current site yet</p>
+          <span data-i18n="emptyStateHint">Click refresh or reload the open tab.</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
