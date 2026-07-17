@@ -1,5 +1,7 @@
 "use strict";
 
+const webExtensionApi = globalThis.browser ?? globalThis.chrome;
+
 const MESSAGE_DOMAINS_FOUND = "SDE_DOMAINS_FOUND";
 const MESSAGE_FORCE_SCAN = "SDE_FORCE_SCAN";
 const MESSAGE_GET_COLLECTION_STATE = "SDE_GET_COLLECTION_STATE";
@@ -325,7 +327,7 @@ function flushPendingHostnames() {
   const domains = Array.from(pendingHostnames);
   pendingHostnames.clear();
 
-  chrome.runtime
+  webExtensionApi.runtime
     .sendMessage({
       type: MESSAGE_DOMAINS_FOUND,
       pageUrl: location.href,
@@ -494,7 +496,7 @@ document.addEventListener("visibilitychange", () => {
 document.addEventListener("DOMContentLoaded", () => collectNow("dom-ready"), { once: true });
 window.addEventListener("load", () => collectNow("load"), { once: true });
 
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+webExtensionApi.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type === MESSAGE_FORCE_SCAN) {
     if (!collectionEnabled) {
       sendResponse({ ok: false, errorKey: "consentRequired", domains: [] });
@@ -521,7 +523,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   return false;
 });
 
-chrome.runtime
+webExtensionApi.runtime
   .sendMessage({ type: MESSAGE_GET_COLLECTION_STATE })
   .then((response) => {
     if (response?.ok && response.enabled === true) {

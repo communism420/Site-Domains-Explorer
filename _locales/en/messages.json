@@ -77,7 +77,7 @@
   "dataNotCollectedTitle": { "message": "Data that is not saved" },
   "dataNotCollectedBody": { "message": "Page content, full URLs, query strings, cookies, credentials, form values and request bodies are not saved." },
   "dataStorageTitle": { "message": "Local-only storage" },
-  "dataStorageBody": { "message": "Saved data stays in Chrome storage on this device. The extension has no analytics and sends no data to a server." },
+  "dataStorageBody": { "message": "Saved data stays in local browser storage on this device. The extension has no analytics and sends no data to a server." },
   "consentDisclosureTitle": { "message": "Permission disclosure" },
   "consentDisclosureBody": { "message": "To identify own and third-party services, Site Domains Explorer reads the addresses of websites you open and their network requests, extracts only hostnames, and stores those hostnames locally. This browsing activity is not shared, sold or transmitted off your device." },
   "consentCheckboxLabel": { "message": "I understand this disclosure and agree to local domain collection." },

@@ -77,7 +77,7 @@
   "dataNotCollectedTitle": { "message": "Nicht gespeicherte Daten" },
   "dataNotCollectedBody": { "message": "Seiteninhalte, vollständige URLs, Abfrageparameter, Cookies, Zugangsdaten, Formularwerte und Anfrageinhalte werden nicht gespeichert." },
   "dataStorageTitle": { "message": "Ausschließlich lokale Speicherung" },
-  "dataStorageBody": { "message": "Gespeicherte Daten verbleiben im Chrome-Speicher dieses Geräts. Die Erweiterung verwendet keine Analysen und sendet keine Daten an Server." },
+  "dataStorageBody": { "message": "Gespeicherte Daten verbleiben im lokalen Browserspeicher auf diesem Gerät. Die Erweiterung verwendet keine Analysen und sendet keine Daten an Server." },
   "consentDisclosureTitle": { "message": "Hinweis zur Berechtigung" },
   "consentDisclosureBody": { "message": "Um eigene und Drittanbieterdienste zu erkennen, liest Site Domains Explorer die Adressen geöffneter Websites und ihrer Netzwerkanfragen, extrahiert ausschließlich Hostnamen und speichert diese lokal. Diese Browseraktivität wird weder weitergegeben noch verkauft oder vom Gerät übertragen." },
   "consentCheckboxLabel": { "message": "Ich habe diesen Hinweis verstanden und stimme der lokalen Domain-Erfassung zu." },

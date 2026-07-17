@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Site Domains Explorer is an open-source Chromium extension for inspecting first-party and third-party hostnames locally."
+      content="Site Domains Explorer 1.0.1 monitors first-party and third-party hostnames in Chromium and Firefox, with local history, search, categorization, and copy controls."
     >
     <meta name="theme-color" content="#0f766e">
     <meta name="referrer" content="no-referrer">
@@ -28,7 +28,8 @@
           <span>Site Domains Explorer</span>
         </a>
         <nav class="site-nav" aria-label="Primary navigation">
-          <a href="index.html" aria-current="page">Home</a>
+          <a href="#features">Features</a>
+          <a href="#browsers">Browsers</a>
           <a href="privacy.html">Privacy Policy</a>
           <a
             href="https://github.com/communism420/Site-Domains-Explorer"
@@ -49,11 +50,11 @@
             height="80"
             alt="Site Domains Explorer icon"
           >
-          <p class="eyebrow">Open-source Chromium extension</p>
+          <p class="eyebrow">Open-source browser extension</p>
           <h1>Site Domains Explorer</h1>
           <p class="lead">
-            See the first-party and third-party hostnames a website uses, while keeping
-            the collected history on your own device.
+            Monitor the first-party and third-party hostnames a website uses in near real
+            time, then search, inspect, categorize, and copy the results locally.
           </p>
           <div class="intro-actions">
             <a class="button primary-button" href="privacy.html">Read the Privacy Policy</a>
@@ -64,32 +65,114 @@
               rel="noreferrer"
             >View the source code</a>
           </div>
+          <ul class="release-meta" aria-label="Current release information">
+            <li><strong>Version 1.0.1</strong></li>
+            <li>Chromium and Firefox</li>
+            <li>Seven interface languages</li>
+          </ul>
         </div>
       </section>
 
-      <section class="facts" aria-labelledby="facts-title">
+      <section class="product-preview" aria-labelledby="preview-title">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">Designed for transparency</p>
-            <h2 id="facts-title">Domain visibility without a remote backend</h2>
+            <p class="eyebrow">Current-site view</p>
+            <h2 id="preview-title">A focused view of every detected hostname</h2>
+            <p>
+              Results update while the page is active, with separate controls for first-party,
+              third-party, and complete hostname lists.
+            </p>
+          </div>
+          <figure class="interface-figure">
+            <img
+              src="assets/screenshot-popup-en-1280x800.png"
+              width="1280"
+              height="800"
+              alt="Site Domains Explorer popup showing live hostname monitoring and categorized copy controls"
+            >
+            <figcaption>
+              The popup shows only the currently open site. Searchable history is available from
+              the separate All sites page.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="features" class="facts" aria-labelledby="facts-title">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Version 1.0.1</p>
+            <h2 id="facts-title">Built for repeated inspection, not one-off reports</h2>
+            <p>
+              Network events, Resource Timing, page attributes, stylesheet references, and
+              packaged dynamic-request observers work together for broad hostname discovery.
+            </p>
           </div>
           <div class="facts-grid">
             <article>
               <span class="fact-number" aria-hidden="true">01</span>
-              <h3>Local storage</h3>
-              <p>Hostname history stays in Chrome storage on the device where it was collected.</p>
+              <h3>Near-real-time monitoring</h3>
+              <p>New request destinations appear while the current page and its frames are active.</p>
             </article>
             <article>
               <span class="fact-number" aria-hidden="true">02</span>
-              <h3>Explicit consent</h3>
-              <p>Automatic collection remains disabled until the user accepts the disclosure.</p>
+              <h3>Clear categorization</h3>
+              <p>Hostnames are separated into the site's own infrastructure and third-party services.</p>
             </article>
             <article>
               <span class="fact-number" aria-hidden="true">03</span>
-              <h3>Open source</h3>
-              <p>The complete extension and its build process are published under the MIT License.</p>
+              <h3>Purpose-built copying</h3>
+              <p>Copy first-party, third-party, or complete hostname lists with one command.</p>
+            </article>
+            <article>
+              <span class="fact-number" aria-hidden="true">04</span>
+              <h3>Searchable site history</h3>
+              <p>Expand any visited site, inspect categorized domains, and copy its lists separately.</p>
+            </article>
+            <article>
+              <span class="fact-number" aria-hidden="true">05</span>
+              <h3>Local control</h3>
+              <p>Collection requires explicit consent and saved history can be deleted at any time.</p>
+            </article>
+            <article>
+              <span class="fact-number" aria-hidden="true">06</span>
+              <h3>Seven languages</h3>
+              <p>English, Spanish, German, Brazilian Portuguese, Russian, Ukrainian, and French.</p>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section id="browsers" class="browser-support" aria-labelledby="browsers-title">
+        <div class="container browser-support-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Cross-browser Manifest V3</p>
+            <h2 id="browsers-title">Dedicated release packages for each browser engine</h2>
+            <p>
+              A shared WebExtensions codebase uses the background environment supported by each
+              browser, while store packages retain platform-specific manifests.
+            </p>
+          </div>
+          <div class="browser-list">
+            <article>
+              <div>
+                <h3>Chromium</h3>
+                <p>Chrome and Chromium-based browsers version 102 or later.</p>
+              </div>
+              <code>site-domains-explorer-1.0.1.zip</code>
+            </article>
+            <article>
+              <div>
+                <h3>Firefox</h3>
+                <p>Firefox desktop 140 or later and Firefox for Android 142 or later.</p>
+              </div>
+              <code>site-domains-explorer-firefox-1.0.1.zip</code>
+            </article>
+          </div>
+          <p class="source-install-note">
+            Developers can build both validated packages with <code>./build.ps1</code>. The
+            repository root also contains a cross-browser manifest for direct source testing.
+          </p>
         </div>
       </section>
 
@@ -110,8 +193,8 @@
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>Site Domains Explorer</p>
-        <p>Open-source software released under the MIT License.</p>
+        <p>Site Domains Explorer 1.0.1</p>
+        <p>Open-source software for Chromium and Firefox, released under the MIT License.</p>
       </div>
     </footer>
   </body>

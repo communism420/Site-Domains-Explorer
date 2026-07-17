@@ -1,6 +1,6 @@
 # Подготовка Site Domains Explorer к Chrome Web Store
 
-Этот файл содержит готовые формулировки для Developer Dashboard. Используйте опубликованную политику по адресу `https://communism420.github.io/Site-Domains-Explorer/privacy.html` и укажите реальный контакт поддержки.
+Этот файл содержит готовые формулировки для Developer Dashboard для версии `1.0.1`. Используйте опубликованную политику по адресу `https://communism420.github.io/Site-Domains-Explorer/privacy.html` и укажите реальный контакт поддержки.
 
 ## Единственная цель
 
@@ -42,13 +42,13 @@ The extension's single purpose requires discovering hostnames on any HTTP(S) web
 
 ## Краткое описание
 
-Find first-party and third-party domains used by websites, review local history, search results, and copy domain lists.
+Find first- and third-party hostnames used by websites, inspect local history, and copy categorized domain lists.
 
 ## Полное описание
 
 Site Domains Explorer shows in near real time which hostnames a website uses while it loads. It combines browser network events, a packaged network API observer, resource timing, and page resource attributes to find first-party subdomains and third-party services such as APIs, CDNs, scripts, images, fonts, frames, WebSockets, and trackers.
 
-Results are organized by visited site and stored only in the local Chrome profile. Open popup and history views update automatically as new hostnames are observed. The popup shows the current site's domains and can copy own, third-party, or all domains. The all-sites page provides searchable history, expandable domain groups, per-site copy controls, and deletion with confirmation.
+Results are organized by visited site and stored only in the local Chrome profile. Open popup and history views update automatically as new hostnames are observed. The popup shows the current site's domains and can copy first-party, third-party, or all domains. The all-sites page provides searchable history, expandable categorized domain groups, per-site copy controls, and deletion with confirmation.
 
 Automatic collection is disabled until the user accepts a clear first-run disclosure. It can be disabled later from Privacy and data collection. The extension has no analytics, advertising, account system, remote code, or external data server.
 
@@ -58,14 +58,15 @@ Supported interface languages: English, Spanish, German, Portuguese (Brazil), Ru
 
 ## Проверка перед отправкой
 
-1. Загрузите `dist/site-domains-explorer-1.0.0.zip`; `manifest.json` должен лежать в корне архива.
+1. Загрузите `dist/site-domains-explorer-1.0.1.zip`; `manifest.json` должен лежать в корне архива и содержать только Chromium `background.service_worker` без Firefox-полей.
 2. Укажите `https://communism420.github.io/Site-Domains-Explorer/privacy.html` как Privacy Policy URL в Developer Dashboard.
 3. Укажите рабочий email и URL поддержки; текст политики должен ссылаться на тот же канал связи.
-4. Загрузите иконку `icons/icon-128.png` и подготовленный английский скриншот `store-assets/screenshot-history-en-1280x800.png`. Русский вариант находится в `store-assets/screenshot-history-1280x800.png`.
-5. Включите двухэтапную аутентификацию аккаунта разработчика.
-6. Пройдите сценарий чистой установки: до согласия история не появляется; после согласия обычная HTTP(S)-страница начинает собираться; отключение останавливает новый сбор; удаление очищает историю.
-7. Проверьте popup и страницу истории на всех семи языках, особенно длинные немецкие и французские подписи.
-8. Не добавляйте CDN-скрипты, удалённую конфигурацию, аналитику или новые разрешения без обновления раскрытия и политики.
+4. Загрузите иконку `icons/icon-128.png`, малое рекламное изображение `store-assets/promo-small-en-440x280.png` и очень большое рекламное изображение `store-assets/promo-marquee-en-1400x560.png`.
+5. Загрузите английские скриншоты `store-assets/screenshot-popup-en-1280x800.png`, `store-assets/screenshot-history-en-1280x800.png` и `store-assets/screenshot-privacy-1280x800.png`. Русский вариант страницы истории находится в `store-assets/screenshot-history-1280x800.png`; узкий `store-assets/qa-popup-390x720.png` предназначен только для внутренней проверки и не соответствует размерам Chrome Web Store.
+6. Включите двухэтапную аутентификацию аккаунта разработчика.
+7. Пройдите сценарий чистой установки: до согласия история не появляется; после согласия обычная HTTP(S)-страница начинает собираться; отключение останавливает новый сбор; удаление очищает историю.
+8. Проверьте popup и страницу истории на всех семи языках, особенно длинные немецкие и французские подписи.
+9. Не добавляйте CDN-скрипты, удалённую конфигурацию, аналитику или новые разрешения без обновления раскрытия и политики.
 
 ## Примечание о рассмотрении
 

@@ -1,5 +1,7 @@
 "use strict";
 
+const webExtensionApi = globalThis.browser ?? globalThis.chrome;
+
 const MESSAGE_GET_COLLECTION_STATE = "SDE_GET_COLLECTION_STATE";
 const MESSAGE_SET_COLLECTION_STATE = "SDE_SET_COLLECTION_STATE";
 const LANGUAGE_STORAGE_KEY = "__sde_language";
@@ -34,7 +36,7 @@ let collectionEnabled = false;
 function t(messageName, substitutions) {
   const template =
     activeMessages[messageName]?.message ||
-    chrome.i18n.getMessage(messageName) ||
+    webExtensionApi.i18n.getMessage(messageName) ||
     FALLBACK_MESSAGES[messageName] ||
     messageName;
   const values = Array.isArray(substitutions)
@@ -50,7 +52,7 @@ function t(messageName, substitutions) {
 }
 
 function getBrowserLocale() {
-  const normalized = chrome.i18n.getUILanguage().replace("-", "_");
+  const normalized = webExtensionApi.i18n.getUILanguage().replace("-", "_");
   const baseLocale = normalized.split("_")[0];
 
   if (SUPPORTED_LOCALES.has(normalized)) {
@@ -65,7 +67,7 @@ function getIntlLocale() {
 }
 
 async function loadMessages(locale) {
-  const response = await fetch(chrome.runtime.getURL(`_locales/${locale}/messages.json`));
+  const response = await fetch(webExtensionApi.runtime.getURL(`_locales/${locale}/messages.json`));
 
   if (!response.ok) {
     throw new Error(`Failed to load locale: ${locale}`);
@@ -75,7 +77,7 @@ async function loadMessages(locale) {
 }
 
 async function getSavedLocale() {
-  const items = await chrome.storage.local.get(LANGUAGE_STORAGE_KEY);
+  const items = await webExtensionApi.storage.local.get(LANGUAGE_STORAGE_KEY);
   const savedLocale = items[LANGUAGE_STORAGE_KEY];
 
   return SUPPORTED_LOCALES.has(savedLocale) ? savedLocale : getBrowserLocale();
@@ -128,7 +130,7 @@ function setControlsBusy(busy) {
 }
 
 async function loadCollectionState() {
-  const response = await chrome.runtime.sendMessage({ type: MESSAGE_GET_COLLECTION_STATE });
+  const response = await webExtensionApi.runtime.sendMessage({ type: MESSAGE_GET_COLLECTION_STATE });
 
   if (!response?.ok) {
     throw new Error(getResponseError(response, "settingsLoadFailed"));
@@ -142,7 +144,7 @@ async function saveCollectionState(enabled) {
   setControlsBusy(true);
 
   try {
-    const response = await chrome.runtime.sendMessage({
+    const response = await webExtensionApi.runtime.sendMessage({
       type: MESSAGE_SET_COLLECTION_STATE,
       enabled
     });
@@ -166,7 +168,7 @@ async function saveCollectionState(enabled) {
 
 async function handleLanguageChange() {
   const nextLocale = elements.languageSelect.value;
-  await chrome.storage.local.set({ [LANGUAGE_STORAGE_KEY]: nextLocale });
+  await webExtensionApi.storage.local.set({ [LANGUAGE_STORAGE_KEY]: nextLocale });
   await setActiveLocale(nextLocale);
   renderCollectionState();
   setStatus("");

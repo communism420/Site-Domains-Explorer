@@ -77,7 +77,7 @@
   "dataNotCollectedTitle": { "message": "Données non enregistrées" },
   "dataNotCollectedBody": { "message": "Le contenu des pages, les URL complètes, les paramètres de requête, les cookies, les identifiants, les formulaires et le corps des requêtes ne sont pas enregistrés." },
   "dataStorageTitle": { "message": "Stockage exclusivement local" },
-  "dataStorageBody": { "message": "Les données restent dans le stockage Chrome de cet appareil. L’extension n’utilise aucune analyse et n’envoie aucune donnée à un serveur." },
+  "dataStorageBody": { "message": "Les données restent dans le stockage local du navigateur sur cet appareil. L’extension n’utilise aucune analyse et n’envoie aucune donnée à un serveur." },
   "consentDisclosureTitle": { "message": "Information sur l’autorisation" },
   "consentDisclosureBody": { "message": "Pour identifier les services internes et tiers, Site Domains Explorer lit les adresses des sites que vous ouvrez et de leurs requêtes réseau, extrait uniquement les noms d’hôte et les enregistre localement. Cette activité de navigation n’est ni partagée, ni vendue, ni transmise hors de votre appareil." },
   "consentCheckboxLabel": { "message": "Je comprends cette information et j’accepte la collecte locale des domaines." },

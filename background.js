@@ -1,5 +1,7 @@
 "use strict";
 
+const webExtensionApi = globalThis.browser ?? globalThis.chrome;
+
 const MESSAGE_DOMAINS_FOUND = "SDE_DOMAINS_FOUND";
 const MESSAGE_FORCE_SCAN = "SDE_FORCE_SCAN";
 const MESSAGE_REFRESH_CURRENT_TAB = "SDE_REFRESH_CURRENT_TAB";
@@ -53,19 +55,21 @@ let clearSiteDataPromise = null;
 const privacyReady = initializePrivacyState();
 
 async function initializePrivacyState() {
-  try {
-    await chrome.storage.local.setAccessLevel({ accessLevel: "TRUSTED_CONTEXTS" });
-  } catch (error) {
-    console.warn("Site Domains Explorer: could not restrict storage access", error);
+  if (typeof webExtensionApi.storage.local.setAccessLevel === "function") {
+    try {
+      await webExtensionApi.storage.local.setAccessLevel({ accessLevel: "TRUSTED_CONTEXTS" });
+    } catch (error) {
+      console.warn("Site Domains Explorer: could not restrict storage access", error);
+    }
   }
 
-  const items = await chrome.storage.local.get(CONSENT_STORAGE_KEY);
+  const items = await webExtensionApi.storage.local.get(CONSENT_STORAGE_KEY);
   dataCollectionEnabled = items[CONSENT_STORAGE_KEY] === true;
   return dataCollectionEnabled;
 }
 
 function t(messageName, substitutions) {
-  return chrome.i18n.getMessage(messageName, substitutions) || messageName;
+  return webExtensionApi.i18n.getMessage(messageName, substitutions) || messageName;
 }
 
 function errorResponse(messageName) {
@@ -172,7 +176,7 @@ function publishLiveSiteUpdate(siteKey, domains, lastVisited, visitCountDelta, o
     return;
   }
 
-  chrome.runtime
+  webExtensionApi.runtime
     .sendMessage({
       type: MESSAGE_SITE_DATA_UPDATED,
       siteKey,
@@ -265,7 +269,7 @@ function flushSiteUpdate(siteKey) {
         return;
       }
 
-      const existingItems = await chrome.storage.local.get(siteKey);
+      const existingItems = await webExtensionApi.storage.local.get(siteKey);
       const existing = isSiteRecord(existingItems[siteKey])
         ? existingItems[siteKey]
         : { domains: [], lastVisited: 0, visitCount: 0 };
@@ -290,7 +294,7 @@ function flushSiteUpdate(siteKey) {
       };
 
       rememberLiveDomains(siteKey, record.domains);
-      await chrome.storage.local.set({ [siteKey]: record });
+      await webExtensionApi.storage.local.set({ [siteKey]: record });
     })
     .catch((error) => {
       console.warn("Site Domains Explorer: failed to write storage record", error);
@@ -324,7 +328,7 @@ async function resolveTabSiteKey(tabId) {
     return tabSiteKeyLookups.get(tabId);
   }
 
-  const lookup = chrome.tabs
+  const lookup = webExtensionApi.tabs
     .get(tabId)
     .then((tab) => {
       const currentSiteKey = tabSiteKeys.get(tabId);
@@ -393,7 +397,7 @@ async function handleWebRequest(details) {
 
 async function rescanTab(tabId) {
   try {
-    const response = await chrome.tabs.sendMessage(tabId, { type: MESSAGE_FORCE_SCAN });
+    const response = await webExtensionApi.tabs.sendMessage(tabId, { type: MESSAGE_FORCE_SCAN });
     return { ok: true, response };
   } catch (_error) {
     return { ok: false, response: null };
@@ -438,7 +442,7 @@ async function getAllSiteData() {
     await flushAllUpdates();
   }
 
-  const items = await chrome.storage.local.get(null);
+  const items = await webExtensionApi.storage.local.get(null);
   const result = {};
 
   for (const [key, value] of Object.entries(items)) {
@@ -452,7 +456,7 @@ async function getAllSiteData() {
 }
 
 async function getCurrentTabContext() {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const [tab] = await webExtensionApi.tabs.query({ active: true, currentWindow: true });
 
   if (!tab || typeof tab.id !== "number" || !tab.url) {
     return errorResponse("errorCannotDetermineTab");
@@ -497,7 +501,7 @@ async function getCurrentSiteData(options = {}) {
 
   await flushSiteUpdate(siteKey);
 
-  const items = await chrome.storage.local.get(siteKey);
+  const items = await webExtensionApi.storage.local.get(siteKey);
   const record = isSiteRecord(items[siteKey])
     ? items[siteKey]
     : {
@@ -527,13 +531,13 @@ async function clearAllSiteData() {
       try {
         await storageWriteQueue;
 
-        const items = await chrome.storage.local.get(null);
+        const items = await webExtensionApi.storage.local.get(null);
         const keys = Object.entries(items)
           .filter(([, value]) => isSiteRecord(value))
           .map(([key]) => key);
 
         if (keys.length > 0) {
-          await chrome.storage.local.remove(keys);
+          await webExtensionApi.storage.local.remove(keys);
         }
 
         // A write that was already past its final guard can finish while the reset
@@ -553,7 +557,7 @@ async function clearAllSiteData() {
 }
 
 async function notifyCollectionStateChanged(enabled) {
-  const tabs = await chrome.tabs.query({});
+  const tabs = await webExtensionApi.tabs.query({});
 
   await Promise.all(
     tabs.map(async (tab) => {
@@ -562,7 +566,7 @@ async function notifyCollectionStateChanged(enabled) {
       }
 
       try {
-        await chrome.tabs.sendMessage(tab.id, {
+        await webExtensionApi.tabs.sendMessage(tab.id, {
           type: MESSAGE_COLLECTION_STATE_CHANGED,
           enabled
         });
@@ -575,14 +579,14 @@ async function notifyCollectionStateChanged(enabled) {
 
 async function setCollectionEnabled(enabled) {
   if (enabled) {
-    await chrome.storage.local.set({ [CONSENT_STORAGE_KEY]: true });
+    await webExtensionApi.storage.local.set({ [CONSENT_STORAGE_KEY]: true });
     dataCollectionEnabled = true;
   } else {
     dataCollectionEnabled = false;
     discardPendingUpdates();
     tabSiteKeys.clear();
     await storageWriteQueue;
-    await chrome.storage.local.set({ [CONSENT_STORAGE_KEY]: false });
+    await webExtensionApi.storage.local.set({ [CONSENT_STORAGE_KEY]: false });
   }
 
   await notifyCollectionStateChanged(enabled);
@@ -652,18 +656,18 @@ async function handleMessage(message, sender) {
 
 async function handleInstalled() {
   await privacyReady;
-  const items = await chrome.storage.local.get(CONSENT_STORAGE_KEY);
+  const items = await webExtensionApi.storage.local.get(CONSENT_STORAGE_KEY);
 
   if (typeof items[CONSENT_STORAGE_KEY] === "boolean") {
     return;
   }
 
   dataCollectionEnabled = false;
-  await chrome.storage.local.set({ [CONSENT_STORAGE_KEY]: false });
-  await chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
+  await webExtensionApi.storage.local.set({ [CONSENT_STORAGE_KEY]: false });
+  await webExtensionApi.tabs.create({ url: webExtensionApi.runtime.getURL("onboarding.html") });
 }
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+webExtensionApi.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sender)
     .then(sendResponse)
     .catch((error) => {
@@ -678,32 +682,32 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true;
 });
 
-chrome.runtime.onInstalled.addListener(() => {
+webExtensionApi.runtime.onInstalled.addListener(() => {
   void handleInstalled().catch((error) => {
     console.warn("Site Domains Explorer: first-run setup failed", error);
   });
 });
 
-chrome.webRequest.onBeforeRequest.addListener(
+webExtensionApi.webRequest.onBeforeRequest.addListener(
   (details) => {
     void handleWebRequest(details);
   },
   WEB_REQUEST_FILTER
 );
 
-chrome.webNavigation.onCommitted.addListener((details) => {
+webExtensionApi.webNavigation.onCommitted.addListener((details) => {
   void handleNavigation(details);
 });
 
-chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
+webExtensionApi.webNavigation.onHistoryStateUpdated.addListener((details) => {
   void handleNavigation(details);
 });
 
-chrome.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
+webExtensionApi.webNavigation.onReferenceFragmentUpdated.addListener((details) => {
   void handleNavigation(details);
 });
 
-chrome.tabs.onRemoved.addListener((tabId) => {
+webExtensionApi.tabs.onRemoved.addListener((tabId) => {
   tabSiteKeys.delete(tabId);
   tabSiteKeyLookups.delete(tabId);
 });

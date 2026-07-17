@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Privacy Policy for the Site Domains Explorer Chromium extension."
+      content="Privacy Policy for Site Domains Explorer 1.0.1 for Chromium and Firefox."
     >
     <meta name="theme-color" content="#0f766e">
     <meta name="referrer" content="no-referrer">
@@ -48,18 +48,20 @@
           <a class="back-link" href="index.html">Back to home</a>
           <p class="eyebrow">Site Domains Explorer</p>
           <h1>Privacy Policy</h1>
-          <p class="effective-date">Effective date: July 14, 2026</p>
+          <p class="effective-date">
+            Effective date: July 17, 2026. Applies to extension version 1.0.1.
+          </p>
           <p class="policy-intro">
-            Site Domains Explorer is a Chrome extension that identifies first-party and
-            third-party hostnames used by websites. This policy describes exactly what the
-            extension processes, why it is needed, and how users control it.
+            Site Domains Explorer is a browser extension for Chromium and Firefox that identifies
+            first-party and third-party hostnames used by websites. This policy describes exactly
+            what the extension processes, why it is needed, and how users control it.
           </p>
         </header>
 
         <aside class="policy-summary" aria-label="Privacy summary">
           <strong>Privacy at a glance</strong>
           <p>
-            Collection requires explicit consent. Saved data stays in local Chrome storage.
+            Collection requires explicit consent. Saved data stays in local browser storage.
             The extension has no analytics, advertising, account system, or external data server.
           </p>
         </aside>
@@ -99,9 +101,9 @@
         <section class="policy-section">
           <h2>Local storage and retention</h2>
           <p>
-            All saved data is kept in <code>chrome.storage.local</code> in the user's Chrome
-            profile. Site Domains Explorer does not transmit stored or processed browsing data
-            off the user's device.
+            All saved data is kept in the WebExtensions <code>storage.local</code> area in the
+            user's local browser profile. Site Domains Explorer does not transmit stored or
+            processed browsing data off the user's device.
           </p>
           <p>
             History remains until the user deletes it from the popup or history page, clears
@@ -161,11 +163,13 @@
         <section class="policy-section">
           <h2>Security</h2>
           <p>
-            The extension uses Manifest V3, contains no remotely hosted executable code, and
-            restricts local storage access to trusted extension contexts. Its packaged page
-            observer has no access to Chrome extension APIs, reports only destination hostnames
-            while collection is enabled, does not read payloads or responses, and preserves the
-            result of every observed call.
+            The extension uses Manifest V3 and contains no remotely hosted executable code. On
+            Chromium, local storage access is explicitly restricted to trusted extension contexts
+            when that browser API is available. Its packaged page observer has no access to
+            WebExtension APIs, reports only destination hostnames while collection is enabled,
+            does not read payloads or responses, and preserves the result of every observed call.
+            The Firefox manifest declares that no data is collected or transmitted outside the
+            extension or local browser.
           </p>
         </section>
 
@@ -187,8 +191,8 @@
           <h2>Changes and contact</h2>
           <p>
             Material changes will be reflected in an updated policy and, when required, a new
-            in-product disclosure. Privacy questions can be submitted through the support contact
-            in the Chrome Web Store listing or the
+            in-product disclosure. Privacy questions and support requests can be submitted through
+            the relevant browser-store contact or the
             <a
               href="https://github.com/communism420/Site-Domains-Explorer/issues"
               target="_blank"
@@ -201,7 +205,7 @@
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>Site Domains Explorer</p>
+        <p>Site Domains Explorer 1.0.1</p>
         <p><a href="index.html">Home</a> · <a href="privacy.html">Privacy Policy</a></p>
       </div>
     </footer>

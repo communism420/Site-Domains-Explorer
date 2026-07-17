@@ -1,5 +1,7 @@
 "use strict";
 
+const webExtensionApi = globalThis.browser ?? globalThis.chrome;
+
 const MESSAGE_GET_ALL_DATA = "SDE_GET_ALL_DATA";
 const MESSAGE_CLEAR_ALL_DATA = "SDE_CLEAR_ALL_DATA";
 const MESSAGE_GET_COLLECTION_STATE = "SDE_GET_COLLECTION_STATE";
@@ -35,7 +37,7 @@ const expandedSiteKeys = new Set();
 function t(messageName, substitutions) {
   const template =
     activeMessages[messageName]?.message ||
-    chrome.i18n.getMessage(messageName) ||
+    webExtensionApi.i18n.getMessage(messageName) ||
     messageName;
   const values = Array.isArray(substitutions)
     ? substitutions
@@ -50,7 +52,7 @@ function t(messageName, substitutions) {
 }
 
 function getBrowserLocale() {
-  const normalized = chrome.i18n.getUILanguage().replace("-", "_");
+  const normalized = webExtensionApi.i18n.getUILanguage().replace("-", "_");
   const baseLocale = normalized.split("_")[0];
 
   if (SUPPORTED_LOCALES.has(normalized)) {
@@ -65,7 +67,7 @@ function getIntlLocale() {
 }
 
 async function loadMessages(locale) {
-  const response = await fetch(chrome.runtime.getURL(`_locales/${locale}/messages.json`));
+  const response = await fetch(webExtensionApi.runtime.getURL(`_locales/${locale}/messages.json`));
 
   if (!response.ok) {
     throw new Error(`Failed to load locale: ${locale}`);
@@ -75,7 +77,7 @@ async function loadMessages(locale) {
 }
 
 async function getPreferredLocale() {
-  const items = await chrome.storage.local.get(LANGUAGE_STORAGE_KEY);
+  const items = await webExtensionApi.storage.local.get(LANGUAGE_STORAGE_KEY);
   const savedLocale = items[LANGUAGE_STORAGE_KEY];
 
   return SUPPORTED_LOCALES.has(savedLocale) ? savedLocale : getBrowserLocale();
@@ -188,7 +190,7 @@ function applyLiveSiteUpdate(message) {
 }
 
 async function loadCollectionState() {
-  const response = await chrome.runtime.sendMessage({ type: MESSAGE_GET_COLLECTION_STATE });
+  const response = await webExtensionApi.runtime.sendMessage({ type: MESSAGE_GET_COLLECTION_STATE });
 
   if (!response?.ok) {
     throw new Error(getResponseError(response, "errorInternal"));
@@ -260,7 +262,7 @@ async function writeTextToClipboard(text) {
       await navigator.clipboard.writeText(text);
       return;
     } catch (_error) {
-      // Fall back to a user-initiated document copy in older Chromium versions.
+      // Fall back when the asynchronous clipboard API is unavailable.
     }
   }
 
@@ -450,7 +452,7 @@ function renderSites() {
 
 async function loadSites() {
   setStatus(t("historyLoading"));
-  const response = await chrome.runtime.sendMessage({ type: MESSAGE_GET_ALL_DATA });
+  const response = await webExtensionApi.runtime.sendMessage({ type: MESSAGE_GET_ALL_DATA });
 
   if (!response?.ok) {
     const errorMessage = response?.errorKey ? t(response.errorKey) : response?.error;
@@ -475,7 +477,7 @@ async function clearAllHistory() {
   elements.confirmClearHistoryButton.disabled = true;
 
   try {
-    const response = await chrome.runtime.sendMessage({ type: MESSAGE_CLEAR_ALL_DATA });
+    const response = await webExtensionApi.runtime.sendMessage({ type: MESSAGE_CLEAR_ALL_DATA });
 
     if (!response?.ok) {
       throw new Error(getResponseError(response, "clearAllDataFailed"));
@@ -499,7 +501,7 @@ elements.clearHistoryButton.addEventListener("click", openClearHistoryDialog);
 elements.confirmClearHistoryButton.addEventListener("click", clearAllHistory);
 elements.siteSearchInput.addEventListener("input", renderSites);
 
-chrome.storage.onChanged.addListener((changes, areaName) => {
+webExtensionApi.storage.onChanged.addListener((changes, areaName) => {
   if (areaName !== "local") {
     return;
   }
@@ -534,7 +536,7 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
   }
 });
 
-chrome.runtime.onMessage.addListener((message) => {
+webExtensionApi.runtime.onMessage.addListener((message) => {
   if (message?.type !== MESSAGE_SITE_DATA_UPDATED) {
     return false;
   }
